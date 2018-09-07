@@ -1,0 +1,37 @@
+// VARIABLES
+//fonts
+
+// $BaronNeue: BaronNeue, Arial, sans-serif;
+// $Calibri: NotoSans, Arial, sans-serif;
+// $PTSerif: Rubik, Arial, sans-serif;
+
+//other
+
+// $full-hd: "screen and (max-width: 1869px)";
+// $desctop-lg: "screen and (max-width: 1520px)";
+$desctop-lg: "screen and (max-width: 1599px)";
+$desctop-md: "screen and (max-width: 1399px)";
+
+$desctop: "screen and (max-width: 1199px)";
+$tablet: "screen and (max-width: 991px)";
+$mobile: "screen and (max-width: 767px)";
+
+//MIXINS
+
+$prefixes: "-webkit-", "-o-", "-moz-", "-ms-";
+
+@mixin addPrefix($item, $val) {
+	@each $tmp in $prefixes {
+		#{$tmp}#{$item}:#{$val};
+	}
+	#{$item}: $val;
+}
+
+$prefixes-placeholder: "&::-webkit-input-", "&::-moz-", "&:-moz-", "&:-ms-";
+
+@mixin addPrefixPlaceholder($placeholder, $item, $val) {
+	@each $tmp in $prefixes-placeholder {
+		#{$tmp}#{$placeholder}{#{$item}:#{$val}};
+	}
+	#{$placeholder}{#{$item}: $val};
+}
