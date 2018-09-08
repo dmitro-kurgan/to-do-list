@@ -9,71 +9,71 @@ html(lang="en")
 			.main.container
 				.todo
 					.todo__block
-					.todo__block-title
-						h1 Todo:
-					ul.todo__list#list
-						li.todo__item
-							h3.todo__title Title of the task 1.
-							span.todo__name Проект:
-								p Project 1
-							span.todo__priority Priority
-								p 1
-							P.todo__desc
-								| Description
-							.todo__btns
-								a(href="#").todo__btn.todo__btn--change Изменить
-								a(href="#").todo__btn.todo__btn--close Закрыть
-								a(href="#").todo__btn.todo__btn--toggle Развернуть
-						li.todo__item
-							h3.todo__title Title of the task 2.
-							span.todo__name Проект:
-								p Project 2
-							span.todo__priority Priority
-								p 2
-							P.todo__desc
-								| Description
-							.todo__btns
-								a(href="#").todo__btn.todo__btn--change Изменить
-								a(href="#").todo__btn.todo__btn--close Закрыть
-								a(href="#").todo__btn.todo__btn--toggle Развернуть
-						li.todo__item
-							h3.todo__title Title of the task 3.
-							span.todo__name Проект:
-								p Project 3
-							span.todo__priority Priority
-								p 3
-							P.todo__desc
-								| Description
-							.todo__btns
-								a(href="#").todo__btn.todo__btn--change Изменить
-								a(href="#").todo__btn.todo__btn--close Закрыть
-								a(href="#").todo__btn.todo__btn--toggle Развернуть
-					form(action="").todo__panel
-						button.todo__btn#addTask Новая задача
-						label(for="listSetPriority")
-							input(type="checkbox")#SetPriority 
-							p по приоритету
-						select(title="Все")#selectTask
-							option(value="Все") Все
-							option(value="Project 1") Project 1
-							option(value="Project 2") Project 2
-							option(value="Project 3") Project 3
-					form(action="").todo__add
-						label(for="addTitle")
-							input(type="text")#addTitle
-							| Заголовок задачи
-						label(for="addName")
-							input(type="text")#addName
-							| Название проекта
-						label(for="addPriority")
-							select(title="1")#addPriority
-								option(value="1") 1
-								option(value="2") 2
-								option(value="3") 3
-							| Приоритет
-						label(for="addDescription")
-							textarea#addDescription
-							| Описание
-						//- a(href="#").todo__save#saveTask Save changes
-						a(href="#").todo__cancel#cancelTask Cancel
+						.todo__block-title
+							h1 Todo:
+						ul.todo__list#list
+							li.todo__item
+								h3.todo__title Title of the task 1.
+								span.todo__name Проект:
+									p Project 1
+								span.todo__priority Priority
+									p 1
+								P.todo__desc
+									| Description
+								.todo__btns
+									a(href="#").todo__btn.todo__btn--change Изменить
+									a(href="#").todo__btn.todo__btn--close Закрыть
+									a(href="#").todo__btn.todo__btn--toggle Развернуть
+							li.todo__item
+								h3.todo__title Title of the task 2.
+								span.todo__name Проект:
+									p Project 2
+								span.todo__priority Priority
+									p 2
+								P.todo__desc
+									| Description
+								.todo__btns
+									a(href="#").todo__btn.todo__btn--change Изменить
+									a(href="#").todo__btn.todo__btn--close Закрыть
+									a(href="#").todo__btn.todo__btn--toggle Развернуть
+							li.todo__item
+								h3.todo__title Title of the task 3.
+								span.todo__name Проект:
+									p Project 3
+								span.todo__priority Priority
+									p 3
+								P.todo__desc
+									| Description
+								.todo__btns
+									a(href="#").todo__btn.todo__btn--change Изменить
+									a(href="#").todo__btn.todo__btn--close Закрыть
+									a(href="#").todo__btn.todo__btn--toggle Развернуть
+						form(action="").todo__panel
+							button.todo__btn#addTask Новая задача
+							label(for="listSetPriority")
+								input(type="checkbox")#SetPriority 
+								p по приоритету
+							select(title="Все")#selectTask
+								option(value="Все") Все
+								option(value="Project 1") Project 1
+								option(value="Project 2") Project 2
+								option(value="Project 3") Project 3
+						form(action="").todo__add
+							label(for="addTitle")
+								input(type="text")#addTitle
+								| Заголовок задачи
+							label(for="addName")
+								input(type="text")#addName
+								| Название проекта
+							label(for="addPriority")
+								select(title="1")#addPriority
+									option(value="1") 1
+									option(value="2") 2
+									option(value="3") 3
+								| Приоритет
+							label(for="addDescription")
+								textarea#addDescription
+								| Описание
+							//- a(href="#").todo__save#saveTask Save changes
+							a(href="#").todo__cancel#cancelTask Cancel
 		block script

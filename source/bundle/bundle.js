@@ -2,24 +2,16 @@ import '../components/scss/style.scss';
 
 var i;
 
-var obj = {'myCat': 'Cat', 'myDog': 'Dog'}
 
+var todoList = document.getElementById('list');
 
-localStorage.setItem('obj', JSON.stringify(obj));
+// var todos;
 
+// function toLocal() {
+// 	todos = todoList.innerHTML;
+// 	localStorage.setItem('todos', todos);
+// }
 
-var myNodelist = document.getElementsByTagName('li');
-
-// myNodelist.innerHTML = (div)
-
-for (var i = 0; i < myNodelist.length; i++) {
-	// var o = document.getElementById('listTitle' + [i]);
-	// myNodelist[i].innerHTML = (localStorage.myDog)
-	
-	// console.log(localStorage.myCat);
-	// console.log(myNodelist[i])
-
-}
 
 //GET CONTROL BUTTONS IN THE FORMS
 document.getElementById('addTask').addEventListener('click', addTask);
@@ -30,35 +22,49 @@ var panel = document.querySelector('.todo__panel'),
 form = document.querySelector('.todo__add');
 
 //HIDE/SHOW DESCRIPTION
+var toggleBtns = document.getElementsByClassName('todo__btn--toggle');
+for(i=0;i < toggleBtns.length; i++) {
+	toggleBtns[i].parentNode.previousElementSibling.style.display = 'none';
+	toggleBtns[i].addEventListener('click', showHideDescription);
+}
 function showHideDescription() {
-	var btn = document.getElementsByClassName('todo__btn--toggle');
-	for(i=0;i < btn.length; i++) {
-		btn[i].parentNode.previousElementSibling.style.display = 'none';
-		btn[i].addEventListener('click', function() {
-			var r = this.parentNode.previousElementSibling;
-			if(r.style.display == 'none') {
-				r.style.display = 'block';
-			}
-			else {
-				r.style.display = 'none';
-			}
-		})
+	var elem = this.parentNode.previousElementSibling;
+	if(elem.style.display == 'none') {
+		elem.style.display = 'block';
 	}
-}showHideDescription();
+	else {
+		elem.style.display = 'none';
+	}
+
+}
+// showHideDescription();
+
 
 //CHECK AMOUNT ITEMS
-function checkAmount() {
-	var amount = document.getElementsByClassName('todo__item'),
-	list = document.getElementById('list');
-	for(i = 0;i < amount.length;i++) {
-		if(amount.length <= 1) {
-			list.style.overflowY = 'hidden';
-		}
-		else {
-			list.style.overflowY = "scroll";
-		}
+// function checkAmount() {
+// 	var amount = document.getElementsByClassName('todo__item'),
+// 	list = document.getElementById('list');
+// 	for(i = 0;i < amount.length;i++) {
+// 		if(amount.length <= 1) {
+// 			list.style.overflowY = 'hidden';
+// 		}
+// 		else {
+// 			list.style.overflowY = "scroll";
+// 		}
+// 	}
+// 	// toLocal();
+// }checkAmount();
+
+//CHECK BLOCK HEIGHT
+function checkBlockHeight() {
+	var block = document.querySelector('.todo__list').offsetHeight;
+	if(block < 200) {
+		document.getElementById('list').style.overflowY = "hidden";
 	}
-}checkAmount();
+	else {
+		document.getElementById('list').style.overflowY = "scroll";
+	}
+}
 
 //DEL LI ITEM
 function delItem() {
@@ -66,18 +72,21 @@ function delItem() {
 	for(i = 0;i < del.length;i++) {
 		del[i].addEventListener('click', function() {
 			this.parentNode.parentNode.remove();
-			checkAmount();	
+			// checkAmount();
+			checkBlockHeight()
 		});
 	}
+	// toLocal();
 	
 }delItem();
 
 //OPEN ADDING TASK FORM
 function addTask(event) {
 	event.preventDefault();
-	document.getElementById('addTitle').value = '',
-	document.getElementById('addName').value = '',
-	document.getElementById('addDescription').value = '';
+	var array = ['Title', 'Name', 'Description']
+	for (i=0;i < array.length;i++) {
+		document.getElementById('add' + array[i]).value = '';
+	}
 	if(form.style.display == "block") {
 		form.style.display = "none";
 	} else {
@@ -94,6 +103,7 @@ function addTask(event) {
 		form.insertBefore(add, form.children[4]);
 	}
 	document.getElementById('saveTask').addEventListener('click', saveTask);
+	// toLocal();
 }
 
 //CANCEL ADDING TASK AND CLOSE FORM
@@ -107,6 +117,7 @@ function cancelTask(event) {
 	else if(document.getElementById('chgTask')) {
 		document.getElementById('chgTask').remove();
 	}
+	// toLocal();
 }
 
 //ADD TASK TO LIST
@@ -137,6 +148,7 @@ function saveTask(event) {
 	var desc = document.createElement('p');
 	desc.className = 'todo__desc';
 	desc.innerHTML = descValue;
+	desc.style.display = "none";
 	//BUTTONS PANEL
 	var btns = document.createElement('div');
 	btns.classList.add("todo__btns");
@@ -149,6 +161,9 @@ function saveTask(event) {
 	var btnToggle = document.createElement('a');
 	btnToggle.classList.add("todo__btn", "todo__btn--toggle");
 	btnToggle.innerHTML = "Развернуть";
+	btnToggle.onclick = showHideDescription;
+	
+	// btnToggle.onclick = showHideDescription;
 	//BUTTONS PANEL IN THE NEW TASK
 	var arrBtn = [btnChange, btnClose, btnToggle];
 	for(var i = 0; i < arrBtn.length; i++) {
@@ -162,27 +177,44 @@ function saveTask(event) {
 		panel.style.display = 'flex';
 		form.style.display = "none";
 		var item = document.getElementById('list').appendChild(li),
-		arrEl = [title, name, priority, desc, btns];
+		selectValue = document.getElementById('selectTask').value;
+		if(selectValue !== "Все") {
+			if(nameValue !== selectValue) {
+				item.setAttribute('style', 'display: none');
+			}
+		}
+		var arrEl = [title, name, priority, desc, btns];
 		for (i = 0; i < arrEl.length; i++) {
 			item.appendChild(arrEl[i]);
 		}
+		// showHideDescription();
 		document.getElementById('saveTask').remove();
 	}
 	//SELECT CHANGE
-	var select = document.getElementById('selectTask');
-	var option = document.createElement('option');
-	option.setAttribute('value', nameValue);
-	option.innerHTML = nameValue;
-	for(i=0;i < select.options.length;i++) {
-		var opt = select.options.item([i]).value;
-		// console.log(opt == nameValue);
-		if(opt !== nameValue) {
-			// select.appendChild(option);
-		}
+	// var select = document.getElementById('selectTask');
+	// var option = document.createElement('option');
+	// option.setAttribute('value', nameValue);
+	// option.innerHTML = nameValue;
+	// for(i=0;i < select.options.length;i++) {
+	// 	var opt = select.options.item([i]).value;
+
+	// 	if(opt !== nameValue) {
+			
+	// 	}
+	// }
+
+	if(document.getElementById('SetPriority').checked == true) {
+		sortList();
 	}
-	showHideDescription();
+
+
+
+
+
+
+	// showHideDescription();
 	delItem();
-	checkAmount();
+	checkBlockHeight();
 }
 
 //CHANGE VALUES OF EXISTING TASK
@@ -212,6 +244,7 @@ function changeTask(event) {
 			else if(document.getElementById('saveTask')) {
 				document.getElementById('saveTask').remove();
 			}
+			var item = this.parentNode.parentNode;
 			var t = this.parentNode.parentNode.getElementsByClassName('todo__title')[0],
 			tc = t.textContent,
 			title = document.getElementById('addTitle');
@@ -228,6 +261,8 @@ function changeTask(event) {
 			dc = d.textContent,
 			desc = document.getElementById('addDescription');
 			desc.value = dc;
+
+			console.log(this.parentNode.parentNode)
 			document.getElementById('chgTask').addEventListener('click', function() {
 				if(title.value == '' || name.value == '' || desc.value == '') {
 					alert('Заполнены не все поля!');
@@ -245,13 +280,99 @@ function changeTask(event) {
 						y.innerHTML = o.value;
 					}
 
+					var selectValue = document.getElementById('selectTask').value;
+					if(selectValue !== "Все") {
+						if(name.value !== selectValue) {
+							item.setAttribute('style', 'display: none');
+						}
+					}
+					// console.log(this.parentNode);
+
 					form.style.display = 'none';
 					panel.style.display = 'flex';
 					if(document.getElementById('chgTask')) {
 						document.getElementById('chgTask').remove();
 					}	
 				};
+				if(document.getElementById('SetPriority').checked == true) {
+					sortList();
+				}
 			});
 		});
 	};
+	// toLocal();
+	// eventFire(document.getElementById('SetPriority'), 'click');
+	
+	
+
+
+
+	// sortList();
+	// document.getElementById('SetPriority').onclick = sortList;
 };
+
+
+
+
+// document.getElementById('SetPriority').addEventListener('click', sortList);
+
+document.getElementById('SetPriority').onclick = sortList;
+
+function sortList() {
+
+	var list, switching, li, one, sec, shouldSwitch
+	list = document.getElementById('list');
+	switching = true;
+	while (switching) {
+		switching = false;
+		li = list.getElementsByTagName('LI');
+		for (i = 0; i < (li.length - 1); i++) {
+			shouldSwitch = false;
+			one = li[i].getElementsByClassName('todo__priority')[0].children[0].innerHTML;
+			sec = li[i + 1].getElementsByClassName('todo__priority')[0].children[0].innerHTML;
+			if(document.getElementById('SetPriority').checked == true) {
+				if(Number(one) < Number(sec)) {
+					shouldSwitch = true;
+					break;
+				}
+			}else {
+				if(Number(one) > Number(sec)) {
+					shouldSwitch = true;
+					break;
+				}
+			}
+		}
+		if (shouldSwitch) {
+			li[i].parentNode.insertBefore(li[i + 1], li[i]);
+			switching = true;
+		}
+	}
+}
+
+// if(localStorage.getItem('todos')) {
+// 	todoList.innerHTML = localStorage.getItem('todos')
+// }
+
+
+
+//FILTER TASKS BY NAME
+document.getElementById('selectTask').onclick = filter;
+
+
+
+function filter() {
+	var selectValue = document.getElementById('selectTask').value;
+	var item = document.getElementsByTagName('LI');
+	for(i = 0;i < item.length;i++) {
+		var txt = item[i].children[1].children[0].innerHTML;
+		// console.log(selectValue);
+		if (selectValue == "Все") {
+			item[i].style.display = "block";
+		} else if (txt.toLowerCase() !== selectValue.toLowerCase()) {
+			item[i].style.display = "none";
+		} else {
+			item[i].style.display = "block";	
+		}
+	}
+	checkBlockHeight();
+}
