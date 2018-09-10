@@ -126,6 +126,7 @@ function checkBlockHeight() {
 
 //CHANGE VALUES OF EXISTING TASK
 function changeTask(event) {
+	event.preventDefault();
 	//HIDE/SHOW CONTROL PANEL
 	if(form.style.display !== "block") {
 		form.style.display = "block";
@@ -205,7 +206,9 @@ function changeTask(event) {
 					item.setAttribute('style', 'display: none');
 				}
 			}else {
-				document.getElementById('list').style.overflowY = "scroll";
+				if(li.length > 1) {
+					document.getElementById('list').style.overflowY = "scroll";
+				}
 				for(i=0;i<li.length;i++) {
 					li[i].style.display = "block";
 				}

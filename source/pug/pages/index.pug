@@ -12,7 +12,7 @@ html(lang="en")
 						.todo__block-title
 							h1 Todo:
 						ul.todo__list#list
-						form(action="").todo__panel#panel
+						form(action="/").todo__panel#panel
 							a(href="#").todo__btn#addTask Новая задача
 							.checkbox
 								label(for="setPriority")
@@ -22,7 +22,7 @@ html(lang="en")
 							.todo__select
 								select(title="Все")#selectTask
 									option(value="Все") Все
-						form(action="").todo__add
+						form(action="/").todo__add
 							label(for="addTitle")
 								| Заголовок задачи
 								input(type="text")#addTitle
