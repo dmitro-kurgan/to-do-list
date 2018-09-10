@@ -8,43 +8,40 @@
   <body>
     <div class="wrapper">
       <div class="main container">
-        <div class="todo">
-          <div class="todo__block"></div>
-          <div class="todo__block-title">
-            <h1>Todo:</h1>
+        <div class="todo" id="todo">
+          <div class="todo__block">
+            <div class="todo__block-title">
+              <h1>Todo:</h1>
+            </div>
+            <ul class="todo__list" id="list"></ul>
+            <form class="todo__panel" action="" id="panel"><a class="todo__btn" href="#" id="addTask">Новая задача</a>
+              <label for="listSetPriority">
+                <input type="checkbox" id="SetPriority">
+                <p>по приоритету</p>
+              </label>
+              <select title="Все" id="selectTask">
+                <option value="Все">Все</option>
+              </select>
+            </form>
+            <form class="todo__add" action="">
+              <label for="addTitle">
+                <input type="text" id="addTitle">Заголовок задачи
+              </label>
+              <label for="addName">
+                <input type="text" id="addName">Название проекта
+              </label>
+              <label for="addPriority">
+                <select title="1" id="addPriority">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>Приоритет
+              </label>
+              <label for="addDescription">
+                <textarea id="addDescription"></textarea>Описание
+              </label><a class="todo__cancel" href="#" id="cancelTask">Cancel</a>
+            </form>
           </div>
-          <ul class="todo__list" id="list"></ul>
-          <form class="todo__panel" action="">
-            <button class="todo__btn" id="addTask">Новая задача</button>
-            <label for="listSetPriority">
-              <input type="checkbox" id="SetPriority">
-              <p>по приоритету</p>
-            </label>
-            <select title="Все" id="selectTask">
-              <option value="Все">Все</option>
-              <option value="Project 1">Project 1</option>
-              <option value="Project 2">Project 2</option>
-              <option value="Project 3">Project 3</option>
-            </select>
-          </form>
-          <form class="todo__add" action="">
-            <label for="addTitle">
-              <input type="text" id="addTitle">Заголовок задачи
-            </label>
-            <label for="addName">
-              <input type="text" id="addName">Название проекта
-            </label>
-            <label for="addPriority">
-              <select title="1" id="addPriority">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>Приоритет
-            </label>
-            <label for="addDescription">
-              <textarea id="addDescription"></textarea>Описание
-            </label><a class="todo__cancel" href="#" id="cancelTask">Cancel</a>
-          </form>
         </div>
       </div>
     </div>

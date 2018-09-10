@@ -7,10 +7,8 @@ const devserver = require('./webpack/devserver');
 const sass = require('./webpack/sass');
 const css = require('./webpack/css');
 const extractCSS = require('./webpack/css.extract');
-const uglifyJS = require('./webpack/js.uglify');
-const images = require('./webpack/images');
 const fonts = require('./webpack/fonts');
-const json = require('./webpack/json');
+const babel = require('./webpack/babel-loader');
 const fs = require('fs');
 
 const PATHS = {
@@ -46,29 +44,20 @@ const common = merge([
 
 		plugins: [
 			new webpack.ProvidePlugin({
-				$: "jquery",
-				jQuery: "jquery",
-				"window.jQuery": "jquery",
-				"window.$": "jquery"
-			}),
-			new webpack.ProvidePlugin({
-				GoogleMapsLoader: 'google-maps'
 			})
 		]
 		.concat(htmlPlugins)
 	},
 	pug(),
-	images(),
-	fonts(),
-	json()
+	babel(),
+	fonts()
 ]);
 
 module.exports = function(env) {
 	if (env === 'production') {
 		return merge([
 			common,
-			extractCSS(),
-			uglifyJS()
+			extractCSS()
 		]);
 	}
 	if (env === 'development') {
