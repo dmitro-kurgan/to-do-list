@@ -39,3 +39,7 @@
         src: $src;
     }
 }
+
+@include font-face("aFuturica", fonts/aFuturica-Regular, 400, normal);
+@include font-face("aFuturica", fonts/aFuturica-Medium, 500, normal);
+@include font-face("aFuturica", fonts/aFuturica-ExtraBold, 700, normal);

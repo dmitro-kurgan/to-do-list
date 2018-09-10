@@ -27,7 +27,7 @@ function checkItems() {
 		var list = document.getElementById('list');
 		var div = document.createElement('div');
 		div.innerHTML = "Задач нет. Добавьте новую задачу!";
-		div.classList.add('toto__alert');
+		div.classList.add('todo__alert');
 		div.setAttribute('id', 'todoAlert');
 		list.appendChild(div);
 	}
@@ -38,14 +38,13 @@ function checkBlockHeight() {
 	var block = document.getElementById('list')
 	if (block.offsetHeight < 200) {
 		block.style.overflowY = "hidden";
+
 	} else {
 		block.style.overflowY = "scroll";
 	}
-	if (document.getElementsByTagName('LI')) {
+	if( block.offsetHeight < 100) {
 		var li = document.getElementsByTagName('LI');
-		if (li.length > 1) {
-			document.getElementById('list').style.overflowY = "scroll";
-		}
+		document.getElementById('list').style.overflowY = "scroll";
 		for (i=0;i < li.length;i++) {
 			li[i].style.display = "block";
 		}
@@ -60,6 +59,9 @@ function changeTask(event) {
 		panel.style.display = 'none';
 	}
 	//CREATE CHANGE BUTTON
+	if (document.getElementById('saveTask')) {
+		document.getElementById('saveTask').remove();
+	}
 	if(!document.getElementById('chgTask')) {
 		var chgTask = document.createElement('a');
 		function setAttributes(el, attrs) {
@@ -67,13 +69,10 @@ function changeTask(event) {
 		    el.setAttribute(key, attrs[key]);
 		  }
 		}
-		setAttributes(chgTask, {"href": "#", "id": "chgTask"});
+		setAttributes(chgTask, {"href": "#", "id": "chgTask", "class": "todo__btn"});
 		chgTask.innerHTML = 'Save changes';
 
 		form.insertBefore(chgTask, form.children[4]);
-	}
-	else if(document.getElementById('saveTask')) {
-		document.getElementById('saveTask').remove();
 	}
 	//GET VALUES FROM FORM
 	var item = this.parentNode.parentNode;
@@ -139,7 +138,7 @@ function changeTask(event) {
 			}
 		};
 		//CHECK IF CHECKBOX IS CHECKED WHILE REPLACING VALUES IN TASK
-		if (document.getElementById('SetPriority').checked == true) {
+		if (document.getElementById('setPriority').checked == true) {
 			sortList();
 		}
 		toLocal();
@@ -162,6 +161,9 @@ function delItem(event) {
 	}
 	checkBlockHeight();
 	checkItems();
+	if (li.length == 1 || li.length == 0) {
+		document.getElementById('list').style.overflowY = "hidden";
+	}
 	toLocal();
 	toLocal2();
 }
@@ -195,7 +197,7 @@ function addTask(event) {
 		    el.setAttribute(key, attrs[key]);
 		  }
 		}
-		setAttributes(add, {"href": "#", "id": "saveTask"});
+		setAttributes(add, {"href": "#", "id": "saveTask", "class": "todo__btn"});
 		add.innerHTML = 'Save changes';
 		form.insertBefore(add, form.children[4]);
 	}
@@ -299,7 +301,7 @@ function saveTask(event) {
 		}
 		document.getElementById('saveTask').remove();
 	}
-	if (document.getElementById('SetPriority').checked == true) {
+	if (document.getElementById('setPriority').checked == true) {
 		sortList();
 	}
 	checkBlockHeight();
@@ -316,7 +318,7 @@ function sortList() {
 		li[i].parentNode.insertBefore(li[i + 1], li[i]);
 		switching = true;
 	}
-	if(document.getElementById('SetPriority').checked == true) {
+	if(document.getElementById('setPriority').checked == true) {
 		while (switching) {
 			switching = false;
 			li = list.getElementsByTagName('LI');
@@ -391,7 +393,7 @@ document.getElementById('addTask').addEventListener('click', addTask);
 document.getElementById('cancelTask').addEventListener('click', cancelTask);
 
 //EVENTS ON CHECKBOX AND SELECT
-document.getElementById('SetPriority').onclick = sortList;
+document.getElementById('setPriority').onclick = sortList;
 document.getElementById('selectTask').onclick = filterList;
 
 //GET CONTROL PANELS WITH FORM

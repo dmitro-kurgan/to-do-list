@@ -15,31 +15,37 @@
             </div>
             <ul class="todo__list" id="list"></ul>
             <form class="todo__panel" action="" id="panel"><a class="todo__btn" href="#" id="addTask">Новая задача</a>
-              <label for="listSetPriority">
-                <input type="checkbox" id="SetPriority">
-                <p>по приоритету</p>
-              </label>
-              <select title="Все" id="selectTask">
-                <option value="Все">Все</option>
-              </select>
+              <div class="checkbox">
+                <label for="setPriority">
+                  <input type="checkbox" id="setPriority">
+                  <div class="checkbox-square"></div>по приоритету
+                </label>
+              </div>
+              <div class="todo__select">
+                <select title="Все" id="selectTask">
+                  <option value="Все">Все</option>
+                </select>
+              </div>
             </form>
             <form class="todo__add" action="">
-              <label for="addTitle">
-                <input type="text" id="addTitle">Заголовок задачи
+              <label for="addTitle">Заголовок задачи
+                <input type="text" id="addTitle">
               </label>
-              <label for="addName">
-                <input type="text" id="addName">Название проекта
+              <label for="addName">Название проекта
+                <input type="text" id="addName">
               </label>
-              <label for="addPriority">
-                <select title="1" id="addPriority">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>Приоритет
+              <label for="addPriority">Приоритет
+                <div class="todo__select">
+                  <select title="1" id="addPriority">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </select>
+                </div>
               </label>
-              <label for="addDescription">
-                <textarea id="addDescription"></textarea>Описание
-              </label><a class="todo__cancel" href="#" id="cancelTask">Cancel</a>
+              <label for="addDescription">Описание
+                <textarea id="addDescription"></textarea>
+              </label><a class="todo__btn todo__cancel" href="#" id="cancelTask">Cancel</a>
             </form>
           </div>
         </div>

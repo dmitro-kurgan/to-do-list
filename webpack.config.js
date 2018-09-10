@@ -7,6 +7,7 @@ const devserver = require('./webpack/devserver');
 const sass = require('./webpack/sass');
 const css = require('./webpack/css');
 const extractCSS = require('./webpack/css.extract');
+const images = require('./webpack/images');
 const fonts = require('./webpack/fonts');
 const babel = require('./webpack/babel-loader');
 const fs = require('fs');
@@ -50,6 +51,7 @@ const common = merge([
 	},
 	pug(),
 	babel(),
+	images(),
 	fonts()
 ]);
 

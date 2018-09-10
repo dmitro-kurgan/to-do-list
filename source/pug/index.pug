@@ -14,9 +14,11 @@ html(lang="en")
 						ul.todo__list#list
 						form(action="").todo__panel#panel
 							a(href="#").todo__btn#addTask Новая задача
-							label(for="listSetPriority")
-								input(type="checkbox")#SetPriority 
-								p по приоритету
+							.checkbox
+								label(for="listSetPriority")
+									input(type="checkbox")#SetPriority
+									.checkbox-square
+									| по приоритету
 							select(title="Все")#selectTask
 								option(value="Все") Все
 						form(action="").todo__add

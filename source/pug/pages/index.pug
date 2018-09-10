@@ -14,25 +14,29 @@ html(lang="en")
 						ul.todo__list#list
 						form(action="").todo__panel#panel
 							a(href="#").todo__btn#addTask Новая задача
-							label(for="listSetPriority")
-								input(type="checkbox")#SetPriority 
-								p по приоритету
-							select(title="Все")#selectTask
-								option(value="Все") Все
+							.checkbox
+								label(for="setPriority")
+									input(type="checkbox")#setPriority
+									.checkbox-square
+									| по приоритету
+							.todo__select
+								select(title="Все")#selectTask
+									option(value="Все") Все
 						form(action="").todo__add
 							label(for="addTitle")
-								input(type="text")#addTitle
 								| Заголовок задачи
+								input(type="text")#addTitle
 							label(for="addName")
-								input(type="text")#addName
 								| Название проекта
+								input(type="text")#addName
 							label(for="addPriority")
-								select(title="1")#addPriority
-									option(value="1") 1
-									option(value="2") 2
-									option(value="3") 3
 								| Приоритет
+								.todo__select
+									select(title="1")#addPriority
+										option(value="1") 1
+										option(value="2") 2
+										option(value="3") 3
 							label(for="addDescription")
-								textarea#addDescription
 								| Описание
-							a(href="#").todo__cancel#cancelTask Cancel
+								textarea#addDescription
+							a(href="#").todo__btn.todo__cancel#cancelTask Cancel
