@@ -256,8 +256,10 @@ function showHideDescription(event) {
 	var elem = this.parentNode.previousElementSibling;
 	if (elem.style.display == 'none') {
 		elem.style.display = 'block';
+		elem.nextElementSibling.children[2].innerHTML = "Свернуть";
 	} else {
 		elem.style.display = 'none';
+		elem.nextElementSibling.children[2].innerHTML = "Развернуть";
 	}
 }
 
