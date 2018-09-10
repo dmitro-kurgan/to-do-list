@@ -42,7 +42,7 @@ function checkBlockHeight() {
 	} else {
 		block.style.overflowY = "scroll";
 	}
-	if( block.offsetHeight < 100) {
+	if (block.offsetHeight < 100) {
 		var li = document.getElementsByTagName('LI');
 		document.getElementById('list').style.overflowY = "scroll";
 		for (i=0;i < li.length;i++) {
@@ -131,6 +131,11 @@ function changeTask(event) {
 				if (name.value !== selectValue) {
 					item.setAttribute('style', 'display: none');
 				}
+			}else {
+				document.getElementById('list').style.overflowY = "scroll";
+				for(i=0;i<li.length;i++) {
+					li[i].style.display = "block";
+				}
 			}
 			//REMOVE CHANGE BUTTON
 			if (document.getElementById('chgTask')) {
@@ -141,6 +146,7 @@ function changeTask(event) {
 		if (document.getElementById('setPriority').checked == true) {
 			sortList();
 		}
+
 		toLocal();
 		toLocal2();
 	});	
@@ -305,6 +311,9 @@ function saveTask(event) {
 		sortList();
 	}
 	checkBlockHeight();
+	if (li.length == 1 || li.length == 0) {
+		document.getElementById('list').style.overflowY = "hidden";
+	}
 	toLocal();
 	toLocal2();
 }
